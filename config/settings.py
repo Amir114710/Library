@@ -36,14 +36,6 @@ APPS = [
 ]
 
 PACKAGES = [
-    'rest_framework',
-    'rest_framework.authtoken',
-    'drf_spectacular',
-    'ckeditor',
-    'ckeditor_uploader',
-    'django_render_partial',
-    'crispy_forms',
-    'widget_tweaks',
 ]
 
 INSTALLED_APPS = [
