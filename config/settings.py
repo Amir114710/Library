@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 APPS = [
     'Library.apps.LibraryConfig',
+    'account.apps.AccountConfig',
 ]
 
 PACKAGES = [
@@ -42,6 +43,7 @@ PACKAGES = [
     'ckeditor_uploader',
     'django_render_partial',
     'crispy_forms',
+    'widget_tweaks',
 ]
 
 INSTALLED_APPS = [
@@ -149,6 +151,8 @@ CKEDITOR_CONFIGS = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = 'account.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

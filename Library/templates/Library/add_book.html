@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1> افزودن کتاب</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-left">
+              <li class="breadcrumb-item"><a href="#">خانه</a></li>
+              <li class="breadcrumb-item active"> افزودن کتاب</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title"> افزودن کتاب</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">نام کتاب</label>
+                    {{form.title}}
+                  </div>
+                  <div class="form-group">
+                    <label>سال انتشار</label>
+                    {{form.created_at}}
+                  </div>
+                  <div class="form-group">
+                    <label>توضیحات</label>
+                    {{form.content}}
+                  </div>
+                  <div class="form-group">
+                    <label>منتشر کننده</label>
+                    {{form.publisher}}
+                  </div>
+                  <div class="form-group">
+                    <label> مولفان</label>
+                    {{form.the_author}}
+                  </div>
+                  <div class="form-group">
+                    <label> پایه تحصیلی</label>
+                    {{form.educational_base}}
+                  </div>
+                  <div class="form-group">
+                    <label>دسته بندی</label>
+                    {{form.category|attr:"class=form-control"}}
+                  </div>
+                  <div class="form-group">
+                    <label> درس</label>
+                    {{form.leason|attr:"class=form-control"}}
+                  </div>
+                  <div class="form-group">
+                    <label> سطح</label>
+                    {{form.type|attr:"class=form-control"}}
+                  </div>
+                  <div class="form-group">
+                    <label> کاربرها</label>
+                    {{form.users|attr:"class=form-control"}}
+                  </div>
+                  <div class="form-group">
+                    {{form.image}}
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">ارسال</button>
+                </div>
+              </form>
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (left) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

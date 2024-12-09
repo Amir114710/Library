@@ -32,21 +32,17 @@
                     <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">کتاب ها</h3>
-                        <br>
-                        <a class="btn btn-app" href="{% url 'library:add_book' %}">
-                            <i class="fa fa-inbox"></i> اضافه کردن کتاب
-                        </a>
-                        <br>
+        
                         <div class="card-tools">
-                        <form method="GET" action="{% url "library:search" %}" >
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="q" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
-            
-                                <div class="input-group-append">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <form method="GET" action="{% url "library:search" %}" >
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="q" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
+                
+                                    <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -62,15 +58,12 @@
                             <th>پایه</th>
                             <th>وضعیت</th>
                             <th>توضیحات</th>
-                            <th>ویرایش</th>
                         </tr>
                         {% for book in books %}
                         <tr>
                             <td>
-                                <a href="{% url 'library:book_detail' book.pk %}">
-                                    <img src="{{book.image.url}}" alt="Product 1" class="img-circle img-size-32 mr-2">
+                                <img src="{{book.image.url}}" alt="Product 1" class="img-circle img-size-32 mr-2">
                                 {{book.title}}
-                                </a>
                             </td>
                             <td>{{book.publisher}}</td>
                             <td>{{book.created_at}}</td>
@@ -92,11 +85,6 @@
                             <td><span class="badge badge-success">لغو شده</span></td>
                             {% endif %}
                             <td>{{book.content}}</td>
-                            <td>
-                                <a href="{% url 'library:book_edite' book.pk %}">
-                                    <button type="button" class="btn btn-block btn-outline-warning btn-sm">ویرایش</button>
-                                </a>
-                            </td>
                         </tr>
                         {% endfor %}
                         </table>
@@ -106,15 +94,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">کاربر ها</h3>
-                            <br>
-                            <a class="btn btn-app" href="{% url 'library:add_user' %}">
-                                <i class="fa fa-inbox"></i> اضافه کردن کاربر
-                            </a>
-                            <br>
+            
                             <div class="card-tools">
                             <form method="GET" action="{% url "library:search_user" %}" >
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="q2" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
+                                    <input type="text" name="q" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
                 
                                     <div class="input-group-append">
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -134,14 +118,11 @@
                                 <th>مدرس</th>
                                 <th>ادمین</th>
                                 <th>فعال</th>
-                                <th>ویرایش</th>
                             </tr>
                             {% for user in users %}
                             <tr>
                                 <td>
-                                    <a href="{% url 'library:user_detail' user.pk %}">
-                                        {{user.phone_number}}
-                                    </a>
+                                    {{user.phone_number}}
                                 </td>
                                 <td>{{user.username}}</td>
                                 <td>{{user.email}}</td>
@@ -158,59 +139,101 @@
                                 {% else %}
                                 <td><span class="badge badge-success">لغو شده</span></td>
                                 {% endif %}
-                                {% if user.is_active %}
+                                {% if user.active %}
                                 <td><span class="badge badge-success">تایید شده</span></td>
                                 {% else %}
                                 <td><span class="badge badge-success">لغو شده</span></td>
                                 {% endif %}
-                                <td>
-                                    <a href="{% url 'library:user_edite' user.id %}">
-                                        <button type="button" class="btn btn-block btn-outline-warning btn-sm">ویرایش</button>
-                                    </a>
-                                </td>
                             </tr>
                             {% endfor %}
                             </table>
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">امانت گیرنده ها</h3>
-                            <br>
-                            <a class="btn btn-app" href="{% url 'library:briwssing_book' %}">
-                                <i class="fa fa-inbox"></i> امانت گیرنده ها
-                            </a>
-                            <br>
-                            <div class="card-tools">
-                            <form method="GET" action="{% url "library:search_user" %}" >
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="q2" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
-                
-                                    <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover">
-                            <tr>
-                            </tr>
-                            <tr>
-                            </tr>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
                     <!-- /.card -->
                 </div>
             </div><!-- /.row -->
             <!-- /.card -->
+        <div class="card">
+            <div class="card-header no-border">
+            <div class="d-flex justify-content-between">
+                <h3 class="card-title">کاربران آنلاین</h3>
+                <a href="javascript:void(0);">مشاهده گزارش</a>
+            </div>
+            </div>
+            <div class="card-body">
+            <div class="d-flex">
+                <p class="d-flex flex-column">
+                <span class="text-bold text-lg">820</span>
+                <span>بازدید کننده در طول زمان</span>
+                </p>
+                <p class="mr-auto d-flex flex-column text-right">
+                <span class="text-success">
+                    <i class="fa fa-arrow-up"></i> 12.5%
+                </span>
+                <span class="text-muted">از هفته گذشته</span>
+                </p>
+            </div>
+            <!-- /.d-flex -->
+
+            <div class="position-relative mb-4">
+                <canvas id="visitors-chart" height="200"></canvas>
+            </div>
+
+            <div class="d-flex flex-row justify-content-end">
+                <span class="ml-2">
+                <i class="fa fa-square text-primary"></i> این هفته
+                </span>
+
+                <span>
+                <i class="fa fa-square text-gray"></i> هفته گذشته
+                </span>
+            </div>
+            </div>
         </div>
+        </div>
+        <!-- /.col-md-6 -->
+        <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header no-border">
+            <div class="d-flex justify-content-between">
+                <h3 class="card-title">فروش</h3>
+                <a href="javascript:void(0);">مشاهده گزارش</a>
+            </div>
+            </div>
+            <div class="card-body">
+            <div class="d-flex">
+                <p class="d-flex flex-column">
+                <span class="text-bold text-lg">تومان 18,230.00</span>
+                <span>فروش در طول زمان</span>
+                </p>
+                <p class="mr-auto d-flex flex-column text-right">
+                <span class="text-success">
+                    <i class="fa fa-arrow-up"></i> 33.1%
+                </span>
+                <span class="text-muted">از ماه گذشته</span>
+                </p>
+            </div>
+            <!-- /.d-flex -->
+
+            <div class="position-relative mb-4">
+                <canvas id="sales-chart" height="200"></canvas>
+            </div>
+
+            <div class="d-flex flex-row justify-content-end">
+                <span class="ml-2">
+                <i class="fa fa-square text-primary"></i> امسال
+                </span>
+
+                <span>
+                <i class="fa fa-square text-gray"></i> سال گذشته
+                </span>
+            </div>
+            </div>
+        </div>
+        <!-- /.card -->
+        </div>
+        <!-- /.col-md-6 -->
     </div>
     <!-- /.row -->
     </div>

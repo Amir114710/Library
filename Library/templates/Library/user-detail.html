@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <br><br>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- Box Comment -->
+                  <div class="card card-widget">
+                    <div class="card-header">
+                      <div class="user-block">
+                        <span class="username"><a href="#">{{user.username}}</a></span>
+                        <span class="description">{{user.date_added}}</span>
+                      </div>
+                      <!-- /.user-block -->
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Mark as read">
+                          <i class="fa fa-circle-o"></i></button>
+                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
+                      </div>
+                      <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                      <!-- post text -->
+                      <label for="p">نام کاربری</label>
+                      <p>{{user.username}}</p>
+                      <label for="p"> تلفن همراه</label>
+                      <p>{{user.phone_number}}</p>
+                      <label for="p"> نام کامل</label>
+                      <p>{{user.full_name}}</p>
+                      <label for="p"> ایمیل</label>
+                      <p>{{user.email}}</p>
+                      <label for="p"> پسورد</label>
+                      <p>{{user.password_copy}}</p>
+                      <!-- Social sharing buttons -->
+                      <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i> اشتراک گذاری</button>
+                      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> لایک</button> -->
+                    </div>
+                  </div>
+                  <!-- /.card -->
+                </div>
+              </div>
+              <!-- /.row -->
+        </div>
+    </section>
+    </div>
+    <!-- /.content-wrapper -->
+{% endblock %}
