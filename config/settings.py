@@ -36,6 +36,7 @@ APPS = [
 ]
 
 PACKAGES = [
+    'widget_tweaks',
 ]
 
 INSTALLED_APPS = [
