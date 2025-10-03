@@ -36,9 +36,12 @@ APPS = [
 ]
 
 PACKAGES = [
+<<<<<<< HEAD
     'ckeditor',
     'ckeditor_uploader',
     'django_render_partial',
+=======
+>>>>>>> 460bf1691fb6e9a3bcddca10d2f06c29521e2455
     'widget_tweaks',
 ]
 
@@ -150,4 +153,32 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'account.User'
 
+<<<<<<< HEAD
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+=======
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=5000),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=5000),
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'NasaApp',
+    'DESCRIPTION': 'Your NasaApp description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST' : True ,
+    # OTHER SETTINGS
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+>>>>>>> 460bf1691fb6e9a3bcddca10d2f06c29521e2455
