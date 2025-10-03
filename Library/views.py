@@ -14,6 +14,8 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['books'] = Book.objects.all()
         context['users'] = User.objects.all()
+        context['browsing_book'] = Borrowingbook.objects.all()
+        context['borrowing_books'] = Book.objects.filter(browssing=True)
         return context
 
 class SearchBookView(ListView):
@@ -35,6 +37,16 @@ class SearchUserView(ListView):
         q = self.request.GET.get('q2')
         return User.objects.filter(
             Q(phone_number__icontains=q) | Q(username__icontains=q) | Q(email__icontains=q) | Q(full_name__icontains=q))
+    
+class SearchBorrowingView(ListView):
+    template_name = 'Library/search-result-borrowing.html'
+    model = User
+    paginate_by = 15
+    context_object_name = 'browsing_book'
+    def get_queryset(self):
+        q = self.request.GET.get('q3')
+        return User.objects.filter(
+            Q(full_name__icontains=q) | Q(phone_number__icontains=q))
     
 
 class CreateBookView(FormView):
@@ -67,6 +79,12 @@ def book_edite(request , pk):
     else:
         return redirect('library:main')
     
+class BookDelete(View):
+    def get(self , request , pk):
+        book = get_object_or_404(Book , pk=pk)
+        book.delete()
+        return redirect('library:main')
+     
 class CreateUserView(FormView):
     template_name = 'Library/add_user.html'
     form_class = CreateUserForm
@@ -95,17 +113,39 @@ def user_edite(request , pk):
         return render(request , 'Library/user-edite.html' , {'form':form})
     else:
         return redirect('library:main')
+
+class UserDelete(View):
+    def get(self , request , pk):
+        user = get_object_or_404(User , pk=pk)
+        user.delete()
+        return redirect('library:main')
     
-class TestView(View):
+class BrowssingView(View):
     template_name = 'Library/briwssing_book.html'
     def get(self , request):
         books = Book.objects.filter(browssing=False)
-        user = User.objects.all()
-        return render(self.request , self.template_name , {'books':books , 'users':user})
+        return render(self.request , self.template_name , {'books':books})
+
+class BrowssingFormView(View):
+    template_name = 'Library/briwssing_book.html'
     def post(self , request):
-        user = request.POST.get('user')
+        full_name = request.POST.get('full_name')
+        phone_number = request.POST.get('phone_number')
         book = request.POST.get('book')
         expiration_date = request.POST.get('expiration_date')
-        Borrowingbook.objects.create(user=user , book=book , expiration_date=expiration_date)
+        books = Book.objects.all()
+        for x in books:
+            book_name = f'{x.title}--{x.educational_base}--{x.leason.title}--{x.publisher}'
+            if book_name == book:
+                print(x)
+                x.browssing == True
+                y=x
+        book = Borrowingbook.objects.create(full_name=full_name , phone_number=phone_number , expiration_date=expiration_date)
+        book.book.add(y)
         return redirect('library:main')
-
+    
+class BorrowingDelete(View):
+    def get(self , request , pk):
+        book = get_object_or_404(Borrowingbook , pk=pk)
+        book.delete()
+        return redirect('library:main')

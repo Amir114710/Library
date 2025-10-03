@@ -34,8 +34,3 @@ class CreateUserForm(forms.ModelForm):
             'full_name':forms.TextInput(attrs={'class': 'form-control' , 'placeholder':'نام کامل' , 'style':'text-align: right!important;'}),
             'email':forms.EmailInput(attrs={'class': 'form-control' , 'placeholder':' ایمیل' , 'style':'text-align: right!important;'}),
         }
-
-class CreateBrowssingForm(forms.ModelForm):
-    class Meta:
-        model = Borrowingbook
-        fields = ('user' , 'book' , 'expiration_date')

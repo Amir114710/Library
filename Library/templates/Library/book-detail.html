@@ -56,6 +56,9 @@
                       <!-- Social sharing buttons -->
                       <!-- <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i> اشتراک گذاری</button>
                       <button type="button" class="btn btn-default btn-sm"><i class="fa fa-thumbs-o-up"></i> لایک</button> -->
+                      <a href="{% url 'library:book_delete' book.id %}">
+                          <button type="button" class="btn btn-block btn-outline-warning btn-sm">حذف</button>
+                      </a>
                     </div>
                   </div>
                   <!-- /.card -->

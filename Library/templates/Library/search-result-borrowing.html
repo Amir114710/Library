@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0 text-dark">داشبورد</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-left">
+            <li class="breadcrumb-item"><a href="#">خانه</a></li>
+            <li class="breadcrumb-item active">داشبورد</li>
+        </ol>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- /.card -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">امانت گیرنده ها</h3>
+                            <br>
+                            <a class="btn btn-app" href="{% url 'library:briwssing_book' %}">
+                                <i class="fa fa-inbox"></i> امانت گیرنده ها
+                            </a>
+                            <br>
+                            <div class="card-tools">
+                            <form method="GET" action="{% url "library:search_borrowing" %}" >
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="q3" class="form-control float-right" placeholder="جستجو" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" required>
+            
+                                <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                            </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover">
+                            <tr>
+                                <th>نام و نام خانوادگی</th>
+                                <th>شماره تلفن</th>
+                                <th>نام کتاب</th>
+                                <th>تاریخ</th>
+                            </tr>
+                            {% for x in browsing_book %}
+                            <tr>
+                                <td>{{x.full_name}}</td>
+                                <td>{{x.phone_number}}</td>
+                                <td>
+                                    {% for y in x.book.all %}
+                                    {{y.title}}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'library:borrowing_delete' x.id %}">
+                                        <button type="button" class="btn btn-block btn-outline-warning btn-sm">حذف</button>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div><!-- /.row -->
+            <!-- /.card -->
+    </div>
+    <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}

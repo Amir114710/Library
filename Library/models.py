@@ -57,8 +57,8 @@ class Book(models.Model):
     browssing = models.BooleanField(default=False , verbose_name='امانت')
     created = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self) -> str:
-        return f'{self.title}---{self.educational_base}-----{self.leason.title}'
+    def __str__(self):
+        return f'{self.title}--{self.educational_base}--{self.leason.title}--{self.publisher}'
     
     class Meta:
         ordering = ('-created',)
@@ -69,13 +69,15 @@ class Book(models.Model):
         return JalaliDate(self.created, locale=('fa')).strftime("%c")
     
 class Borrowingbook(models.Model):
-    user = models.ForeignKey(User , on_delete=models.CASCADE , related_name='rents' , null=True , blank=True , verbose_name='کاربر')
+    full_name = models.CharField(max_length=550 , null=True , blank=True , verbose_name='نام و نام خانوادگی')
+    phone_number = models.CharField(max_length=550 , null=True , blank=True , verbose_name='شماره تلفن')
+    # book = models.CharField(max_length=550 , null=True , blank=True , verbose_name='کتاب امانت گرفته شده')
     book = models.ManyToManyField(Book , related_name='rents' , null=True , blank=True , verbose_name='کتاب')
     expiration_date = models.DateTimeField(null=True , blank=True , verbose_name='تاریخ انقضا')
     date_added = models.DateTimeField(auto_now_add=True , verbose_name='تاریخ تولید')
 
     def __str__(self) -> str:
-        return f'{self.user.phone_number}---{self.book.title}'
+        return f'{self.full_name}--{self.phone_number}'
 
     class Meta:
         ordering = ('-date_added',)
